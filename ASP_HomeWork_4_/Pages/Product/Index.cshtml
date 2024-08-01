@@ -1,0 +1,66 @@
+﻿
+@page
+@model ASP_HomeWork_4_.Pages.Product.IndexModel
+@{
+    ViewData["Title"] = "Product";
+}
+
+<h2>Product</h2>
+
+<section>
+
+    @if (Model.MyProduct.Id != 0)
+    {
+        <form method="post" asp-page-handler="EditModify">
+            <input type="hidden" asp-for="MyProduct.Id" />
+            <div>
+                <label asp-for="MyProduct.Name"></label>
+                <input asp-for="MyProduct.Name" />
+            </div>
+            <div>
+                <label asp-for="MyProduct.Description"></label>
+                <input asp-for="MyProduct.Description" />
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    }
+    else
+    {
+        
+    <form method="post">
+        <input type="hidden" asp-for="MyProduct.Id" />
+        <div>
+            <label asp-for="MyProduct.Name"></label>
+            <input asp-for="MyProduct.Name" />
+        </div>
+        <div>
+            <label asp-for="MyProduct.Description"></label>
+            <input asp-for="MyProduct.Description" />
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    }
+
+    <ul>
+
+        @foreach (var item in Model.Products)
+        {
+            <li>
+                <p>@item.Id</p>
+                <p>@item.Name</p>
+                <p>@item.Description</p>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit">Delete</button>
+                </form>
+                <form method="post" asp-page-handler="Edit">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit">Edit</button>
+                </form>
+            </li>
+        }
+    </ul>
+
+</section>
